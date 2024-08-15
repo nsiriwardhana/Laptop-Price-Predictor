@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Laptop Price Predictor</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="title">Laptop Price Predictor</div>
+        <form action="/" method="POST" id="predictForm">
+            <div class="form">
+                <div class="inputfield">
+                    <label for="ram">Ram (GB)</label>
+                    <input class="input" type="text" name="ram" value="{{ user_data['ram'] if user_data else '' }}" required>
+                </div>
+                <div class="inputfield">
+                    <label for="weight">Weight (Kg)</label>
+                    <input class="input" type="text" name="weight" value="{{ user_data['weight'] if user_data else '' }}" required>
+                </div>
+                <div class="inputfield">
+                    <label for="company">Company</label>
+                    <div class="custom_select">
+                        <select name="company" id="company">
+                            <option value="" selected hidden>Select</option>
+                            <option value="acer" {{ 'selected' if user_data and user_data['company'] == 'acer' }}>Acer</option>
+                            <option value="apple" {{ 'selected' if user_data and user_data['company'] == 'apple' }}>Apple</option>
+                            <option value="asus" {{ 'selected' if user_data and user_data['company'] == 'asus' }}>Asus</option>
+                            <option value="dell" {{ 'selected' if user_data and user_data['company'] == 'dell' }}>Dell</option>
+                            <option value="hp" {{ 'selected' if user_data and user_data['company'] == 'hp' }}>HP</option>
+                            <option value="lenovo" {{ 'selected' if user_data and user_data['company'] == 'lenovo' }}>Lenovo</option>
+                            <option value="msi" {{ 'selected' if user_data and user_data['company'] == 'msi' }}>MSI</option>
+                            <option value="toshiba" {{ 'selected' if user_data and user_data['company'] == 'toshiba' }}>Toshiba</option>
+                            <option value="other" {{ 'selected' if user_data and user_data['company'] == 'other' }}>Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="inputfield">
+                    <label for="typename">Type Name</label>
+                    <div class="custom_select">
+                        <select name="typename" id="typename">
+                            <option value="" selected hidden>Select</option>
+                            <option value="2in1convertible" {{ 'selected' if user_data and user_data['typename'] == '2in1convertible' }}>2 in 1 Convertible</option>
+                            <option value="gaming" {{ 'selected' if user_data and user_data['typename'] == 'gaming' }}>Gaming</option>
+                            <option value="netbook" {{ 'selected' if user_data and user_data['typename'] == 'netbook' }}>Net Book</option>
+                            <option value="notebook" {{ 'selected' if user_data and user_data['typename'] == 'notebook' }}>Note Book</option>
+                            <option value="ultrabook" {{ 'selected' if user_data and user_data['typename'] == 'ultrabook' }}>Ultra Book</option>
+                            <option value="workstation" {{ 'selected' if user_data and user_data['typename'] == 'workstation' }}>Workstation</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="inputfield">
+                    <label for="opsys">Operating System</label>           
+                    <div class="custom_select">
+                        <select name="opsys" id="opsys">
+                            <option value="" selected hidden>Select</option>
+                            <option value="windows" {{ 'selected' if user_data and user_data['opsys'] == 'windows' }}>Windows</option>
+                            <option value="mac" {{ 'selected' if user_data and user_data['opsys'] == 'mac' }}>Mac</option>
+                            <option value="linux" {{ 'selected' if user_data and user_data['opsys'] == 'linux' }}>Linux</option>
+                            <option value="other" {{ 'selected' if user_data and user_data['opsys'] == 'other' }}>Other</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="inputfield">
+                    <label for="cpuname">CPU</label>   
+                    <div class="custom_select">
+                        <select name="cpuname" id="cpuname">
+                            <option value="" selected hidden>Select</option>
+                            <option value="intelcorei3" {{ 'selected' if user_data and user_data['cpu'] == 'intelcorei3' }}>Intel Core i3</option>
+                            <option value="intelcorei5" {{ 'selected' if user_data and user_data['cpu'] == 'intelcorei5' }}>Intel Core i5</option>
+                            <option value="intelcorei7" {{ 'selected' if user_data and user_data['cpu'] == 'intelcorei7' }}>Intel Core i7</option>
+                            <option value="amd" {{ 'selected' if user_data and user_data['cpu'] == 'amd' }}>AMD</option>
+                            <option value="other" {{ 'selected' if user_data and user_data['cpu'] == 'other' }}>Other</option>
+                        </select>  
+                    </div>
+                </div>
+                <div class="inputfield">
+                    <label for="gpuname">GPU</label>
+                    <div class="custom_select">
+                        <select name="gpuname" id="gpuname">
+                            <option value="" selected hidden>Select</option>
+                            <option value="intel" {{ 'selected' if user_data and user_data['gpu'] == 'intel' }}>Intel</option>
+                            <option value="amd" {{ 'selected' if user_data and user_data['gpu'] == 'amd' }}>AMD</option>
+                            <option value="nvidia" {{ 'selected' if user_data and user_data['gpu'] == 'nvidia' }}>Nvidia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="check">   
+                    <div>
+                        <label for="touchscreen">Touch Screen</label>
+                        <input type="checkbox" name="touchscreen" {{ 'checked' if user_data and user_data['touchscreen'] }}>
+                    </div>
+                    <div>
+                        <label for="ips">IPS</label>
+                        <input type="checkbox" name="ips" {{ 'checked' if user_data and user_data['ips'] }}>
+                    </div>
+                </div>
+    
+                <div class="inputfield">
+                    <input class="btn" type="submit" value="Predict Price">
+                </div>
+
+                <div class="inputfield">
+                    {% if pred_value != 0 %}
+                    <div class="price-display">
+                        <p>Estimated Price for the Laptop: <span>LKR {{ pred_value }}</span></p>
+                    </div>
+                    {% endif %}
+                </div>
+                
+
+                <!-- Back Button to reload and reset form -->
+                <div class="inputfield">
+                    <button class="btn" type="button" onclick="clearForm()">Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function clearForm() {
+            window.location.href = "/"; // Reloads the page, clearing the form data
+        }
+    </script>
+</body>
+</html>
